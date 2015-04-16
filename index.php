@@ -155,25 +155,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 			 		<div class="facts" style="display:block" id="search-form">
 					 <div class="login">
-						<form method="post" action="javascript:showCariResult()">
-							<input type="text" class="text" name ="formbuku" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Judul Buku"></input>
+						<form method="post" action="javascript:getCariForm()">
+							<input type="text" class="text" id ="formbuku" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Judul Buku"></input>
 							
 							<div class="find">
 								<p> atau </p>
 							</div>
 							
-							<input type="text" class="text" name ="formpengarang" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Nama Pengarang"></input>
+							<input type="text" class="text" id ="formpengarang" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Nama Pengarang"></input>
 
 							<div class="find">
 								<p> atau </p>
 							</div>
 							
-							<input type="text" class="text" name="formkategori" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Kategori" ></input>
+							<input type="text" class="text" id="formkategori" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Kategori" ></input>
 
 
 							<div class="p-container">
 								<div class="submit two">
-									<input type="submit" value="Cari" name="cari" onclick="javascript:showCariResult()">
+									<input type="submit" value="Cari" name="cari" onclick="javascript:getCariForm()">
 								</div>
 								<div class="clear"> </div>
 							</div>

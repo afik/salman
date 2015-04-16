@@ -23,17 +23,23 @@
 		formCari.style.display = 'block';
 	}
 
+	function getCariForm(){
+		var nama = document.getElementById('formbuku').value;
+		var pengarang = document.getElementById('formpengarang').value;
+		var kategori = document.getElementById('formkategori').value;
+		alert(nama+','+pengarang+','+kategori);	
+		showCariResult(nama, pengarang, kategori);
+	}
+
 	function showCariResult() {
-		alert('aaaa');
 		var formCari = document.getElementById('search-form');
 		var resultBuku = document.getElementById('search-result');
+		var nama = arguments[0];
+		var pengarang = arguments[1];
+		var kategori = arguments[2];
 
 		resultBuku.style.display = 'block';
 		formCari.style.display = 'none';
-
-		var nama = document.getElementByName('formbuku').value;
-		var pengarang = document.getElementByName('formpengarang').value;
-		var kategori = document.getElementByName('formkategori').value;
 
 		var xmlhttp;
 	    if (window.XMLHttpRequest)
@@ -51,6 +57,7 @@
 	            document.getElementById("search-result").innerHTML=xmlhttp.responseText;
 	        }
 	    }
+	    // alert(nama+','+pengarang+','+kategori);
 	    xmlhttp.open("GET","proses.php?state=1&buku="+nama+"&pengarang="+pengarang+"&kategori="+kategori,true);
 	    xmlhttp.send();
 	}

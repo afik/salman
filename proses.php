@@ -6,6 +6,7 @@
 		if ($_GET['state']==1) //buat cari
 		{
 			$link = init();
+			echo $_GET['buku']." ".$_GET['pengarang']." ".$_GET['kategori'];
 			$row = cari($link, $_GET['buku'], $_GET['pengarang'], $_GET['kategori']);
 			
 			echo '<h2> Hasil pencarian untuk : '.$_GET['buku']." ".$_GET['pengarang']." ".$_GET['kategori'].'</h2>';
@@ -70,30 +71,49 @@
 	}
 
 	function cari($link, $buku, $pengarang, $kategori){
+		echo $buku.' '.$pengarang.' '.$kategori;
 		if ($buku =! "" && $pengarang == "" && $kategori == ""){
+			echo '1';
 			$query = "SELECT * FROM buku WHERE judul LIKE '%$judul%'";
 		}
 		else if ($buku == "" && $pengarang =! "" && $kategori == ""){
+			echo '2';
 			$query = "SELECT * FROM buku WHERE pengarang LIKE '%$pengarang%'";
 		}
 		else if ($buku == "" && $pengarang == "" && $kategori =! ""){
+			echo '3';
 			$query = "SELECT * FROM buku WHERE kategori LIKE '%$kategori%'";
 		}
 		else if ($buku == "" && $pengarang == "" && $kategori =! ""){
+			echo '4';
 			$query = "SELECT * FROM buku WHERE pengarang LIKE '%$pengarang%' AND judul like '%$judul%'";
 		}
 		else if ($buku == "" && $pengarang =! "" && $kategori == ""){
+			echo '5';
 			$query = "SELECT * FROM buku WHERE kategori LIKE '%$kategori%' AND judul like '%$judul%'";
 		}
 		else if ($buku =! "" && $pengarang == "" && $kategori == ""){
+			echo '6';
 			$query = "SELECT * FROM buku WHERE kategori LIKE '%$kategori%' AND pengarang like '%$pengarang%'";
 		}
 		else if ($buku == "" && $pengarang == "" && $kategori == ""){
+			echo '7';
 			$query = "SELECT * FROM buku WHERE kategori LIKE '%$kategori%' AND pengarang like '%$pengarang%' AND buku like '%$judul%'";
+		}
+		else {
+			echo 'else';
 		}
 
 		$result = mysqli_query($link,$query);
-        while($row[] = mysqli_fetch_array($result));
+
+		if($result === FALSE) { 
+		    die(mysql_error()); // TODO: better error handling
+		}
+
+		while($temp = mysqli_fetch_assoc($result)){
+        	$row[] = $temp; 
+        }
+	    
         
         return $row;
 
