@@ -31,28 +31,53 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--//webfonts-->
 </head>
 <body>
+<?php 
+	include 'DBConfig.php';
+	include 'proses.php';
+
+	
+	$link = init();
+	if (isset($_POST["buktam"])) {
+		tambahPengunjung($link, $_POST["nama"], $_POST["asal"], $_POST["pekerjaan"]);
+	}
+	if (isset($_POST["daftar"])) {
+		daftar($link, $_POST["nama"], $_POST["ktp"], $_POST["alamat"], $_POST["pekerjaan"], $_POST["hp"]);
+	}
+	if (isset($_POST["cari"])) {
+		cari();
+	}
+
+
+	closeConnection($link);
+?>
 <div class="main">
 	<h1>Salman Reading Corner</h1>
 	<div class="sap_tabs">	
 		<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
 			<ul class="resp-tabs-list">
 			  	<li class="resp-tab-item" aria-controls="tab_item-0" role="tab">
-			  		<div class="top-img">
-			  			<img src="images/tamu.png" alt=""/>
+			  		<a href ="#tab1">
+		  			<div class="top-img">
+		  			<img src="images/tamu.png" alt=""/>
 			  		</div>
 			  		<span>Buku tamu</span>
+			  		</a>
 				</li>
 				<li class="resp-tab-item" aria-controls="tab_item-1" role="tab">
+					<a href="#tab2">
 					<div class="top-img">
 						<img src="images/search.png" alt=""/>
 					</div>
 					<span>Cari Buku</span>
+					</a>
 				</li>
 			  	<li class="resp-tab-item" aria-controls="tab_item-2" role="tab">
-			  		<div class="top-img">
+			  		<a href="#tab3">
+		  			<div class="top-img">
 			  			<img src="images/daftar.png" alt=""/>
 			  		</div>
 			  		<span>Pendaftaran</span>
+			  		</a>
 			  	</li>
 				<div class="clear"></div>
 			</ul>		
@@ -61,22 +86,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 					<div class="facts" style="display:block" id="buktam-form">
 						<div class="register">
-							<form>
-								<p>Nama</p>
-								<input type="text" class="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+							<form id="bukutamu" method="POST" action="index.php">
+								<p>Nama*</p>
+								<input type="text" class="text" value="" name="nama" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required>
 								<p>Asal </p>
-								<input type="text" class="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+								<input type="text" class="text" value="" name="asal" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
 								<p>Pekerjaan </p>
-								<input type="text" class="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+								<input type="text" class="text" value="" name="pekerjaan" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
 								
 								<div class="sign-up">
-									<input type="submit" value="Submit">
-									<input type="submit" value="Lihat Buku Tamu">
+									<p class="keterangan">* harus diisi</p>
+									<input type="submit" value="Submit" name="buktam">
+									<input type="submit" value="Lihat Buku Tamu" onClick="javascript: showDaftarTamu()">
 									<div class="clear"> </div>
 								</div>
-								
 							</form>
-
 						</div>
 					</div>
 
@@ -122,7 +146,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 						<div class="p-container">
 							<div class="submit two">
-								<input type="submit" onclick="" value="Kembali" >
+								<input type="submit" onclick="javascript: showFormTamu()" value="Kembali" >
 							</div>
 							<div class="clear"> </div>
 						</div>
@@ -150,7 +174,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 							<div class="p-container">
 								<div class="submit two">
-									<input type="submit" onclick="" value="CARI" >
+									<input type="submit" value="CARI" >
 								</div>
 								<div class="clear"> </div>
 							</div>
@@ -192,7 +216,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 						<div class="p-container">
 							<div class="submit two">
-								<input type="submit" onclick="" value="Kembali" >
+								<input type="submit" onclick="javascript: showCariForm()" value="Kembali" >
 							</div>
 							<div class="clear"> </div>
 						</div>
@@ -201,22 +225,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			 	<div class="tab-3 resp-tab-content" aria-labelledby="tab_item-2">
 				    <div class="facts">	
 				     	<div class="register">
-							<form class="sub">
+							<form class="sub" id="daftar" method="POST" action="index.php">
 								<p>Nama* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="nama" required>
 								<p>No KTP* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="ktp" required>
 								<p>Alamat* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="alamat" required>
 								<p>Pekerjaan/Sekolah* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="pekerjaan" required>
 								<p>No HP* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="hp" required>
 								
-
 								<div class="sign-up">
 									<p class="keterangan">* harus diisi</p>
-									<input type="submit" onclick="" value="Daftar" >
+									<input type="submit" value="Daftar" name="daftar">
 								</div>
 							</form>
 						</div>

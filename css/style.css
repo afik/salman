@@ -148,6 +148,9 @@ span.tab-img{
   width: 25.5%;
   margin-right: 2.6%;
 }
+a span{
+ color: #FFF;
+}
 .tab-text{
   float:right;
   width:68.5%;
