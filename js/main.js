@@ -27,7 +27,6 @@
 		var nama = document.getElementById('formbuku').value;
 		var pengarang = document.getElementById('formpengarang').value;
 		var kategori = document.getElementById('formkategori').value;
-		alert(nama+','+pengarang+','+kategori);	
 		showCariResult(nama, pengarang, kategori);
 	}
 
@@ -72,29 +71,4 @@
         $respTabs.find('.resp-tab-content[aria-labelledby = ' + $tabAria + ']').addClass('resp-tab-content-active').attr('style', 'display:block');
     }
 
-	function doCari() {
-		alert('masuk');
-		//showCariResult();
-		// var nama = document.getElementByName('formbuku').value;
-		// var pengarang = document.getElementByName('formpengarang').value;
-		// var kategori = document.getElementByName('formkategori').value;
-
-		// var xmlhttp;
-	 //    if (window.XMLHttpRequest)
-	 //    {// code for IE7+, Firefox, Chrome, Opera, Safari
-	 //        xmlhttp=new XMLHttpRequest();
-	 //    }
-	 //    else
-	 //    {// code for IE6, IE5
-	 //        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	 //    }
-	 //    xmlhttp.onreadystatechange=function()
-	 //    {
-	 //        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	 //        {
-	 //            document.getElementById("search-result").innerHTML=xmlhttp.responseText;
-	 //        }
-	 //    }
-	 //    xmlhttp.open("GET","proses.php?state=1&buku="+nama+"&pengarang="+pengarang+"&kategori="+kategori,true);
-	 //    xmlhttp.send();
-	}
+	

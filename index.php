@@ -41,11 +41,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	if (isset($_POST["daftar"])) {
 		daftar($link, $_POST["nama"], $_POST["ktp"], $_POST["alamat"], $_POST["pekerjaan"], $_POST["hp"]);
 	}
-	if (isset($_POST["cari"])) {
-		echo '<script type="text/javascript">
-				doCari();
-			  </script>';
-	}
+	
 
 	closeConnection($link);
 ?>
