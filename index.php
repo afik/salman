@@ -16,26 +16,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </script>
 <script src="js/jquery.min.js"></script>
 <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-				<script type="text/javascript">
-					$(document).ready(function () {
-						$('#horizontalTab').easyResponsiveTabs({
-							type: 'default', //Types: default, vertical, accordion           
-							width: 'auto', //auto or any width like 600px
-							fit: true   // 100% fit in a container
-						});
-					});
-				   </script>
-
+<script src="js/main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#horizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion           
+				width: 'auto', //auto or any width like 600px
+				fit: true   // 100% fit in a container
+			});
+		});
+	   </script>
 <!--webfonts-->
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700,200italic,300italic,400italic,600italic|Lora:400,700,400italic,700italic|Raleway:400,500,300,600,700,200,100' rel='stylesheet' type='text/css'>
 <!--//webfonts-->
 </head>
 <body>
 <?php 
-	include 'DBConfig.php';
 	include 'proses.php';
 
-	
 	$link = init();
 	if (isset($_POST["buktam"])) {
 		tambahPengunjung($link, $_POST["nama"], $_POST["asal"], $_POST["pekerjaan"]);
@@ -44,9 +42,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		daftar($link, $_POST["nama"], $_POST["ktp"], $_POST["alamat"], $_POST["pekerjaan"], $_POST["hp"]);
 	}
 	if (isset($_POST["cari"])) {
-		cari();
+		echo '<script type="text/javascript">
+				doCari();
+			  </script>';
 	}
-
 
 	closeConnection($link);
 ?>
@@ -63,7 +62,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  		<span>Buku tamu</span>
 			  		</a>
 				</li>
-				<li class="resp-tab-item" aria-controls="tab_item-1" role="tab">
+				<li class="resp-tab-item" aria-controls="tab_item-1" role="tab" id="caritab">
 					<a href="#tab2">
 					<div class="top-img">
 						<img src="images/search.png" alt=""/>
@@ -156,25 +155,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 			 		<div class="facts" style="display:block" id="search-form">
 					 <div class="login">
-						<form>
-							<input type="text" class="text" value="Judul Buku" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Judul Buku';}" ></input>
+						<form method="post" action="javascript:showCariResult()">
+							<input type="text" class="text" name ="formbuku" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Judul Buku"></input>
 							
 							<div class="find">
 								<p> atau </p>
 							</div>
 							
-							<input type="text" class="text" value="Nama Pengarang" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nama Pengarang';}" ></input>
+							<input type="text" class="text" name ="formpengarang" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Nama Pengarang"></input>
 
 							<div class="find">
 								<p> atau </p>
 							</div>
 							
-							<input type="text" class="text" value="Kategori" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Kategori';}" ></input>
+							<input type="text" class="text" name="formkategori" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Kategori" ></input>
 
 
 							<div class="p-container">
 								<div class="submit two">
-									<input type="submit" value="CARI" >
+									<input type="submit" value="Cari" name="cari" onclick="javascript:showCariResult()">
 								</div>
 								<div class="clear"> </div>
 							</div>
@@ -184,42 +183,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div> 
 
 					<div class="facts" style="display:none" id="search-result">
-						<h2> Hasil pencarian untuk : "Jacq" </h2>
-						<table class="table-result">
-							<thead>
-								<tr> 
-									<th style="width: 5%">No</th>
-									<th style="width: 30%">Judul Buku </th>
-									<th style="width: 30%">Pengarang </th>
-									<th style="width: 20%">Lokasi </th>
-									<th style="width: 15%">Status </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Oregades</td>
-									<td>Jacq</td>
-									<td>Rak 5</td>
-									<td>Tersedia </td>
-								</tr>
-
-								<tr>
-									<td>2</td>
-									<td>Bintang Mika</td>
-									<td>Jacq</td>
-									<td>Rak 4</td>
-									<td>Dipinjam </td>
-								</tr>		
-							</tbody>
-						</table>
-
-						<div class="p-container">
-							<div class="submit two">
-								<input type="submit" onclick="javascript: showCariForm()" value="Kembali" >
-							</div>
-							<div class="clear"> </div>
-						</div>
+						
 					</div>
 				</div> 			        					 
 			 	<div class="tab-3 resp-tab-content" aria-labelledby="tab_item-2">
