@@ -100,51 +100,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 
 					<div class="facts" style="display:none" id="daftar-tamu">
-						<h2> Daftar tamu Kamis, 9 April 2015 </h2>
-						<table class="table-result">
-							<thead>
-								<tr> 
-									<th style="width: 5%">No</th>
-									<th style="width: 30%">Nama </th>
-									<th style="width: 30%">Asal </th>
-									<th style="width: 30%">Pekerjaan </th>
-									
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Afik</td>
-									<td>ITB</td>
-									<td>Mahasiswa</td>
-								</tr>
-
-								<tr>
-									<td>2</td>
-									<td>Junita</td>
-									<td>Cisitu</td>
-									<td>Mahasiswa</td>
-								</tr>		
-
-
-								<tr>
-									<td>3</td>
-									<td>Yoga</td>
-									<td>Cisitu</td>
-									<td>Pelajar</td>
-								</tr>		
-							</tbody>
-						</table>
-
-						<br>
-						<h4> Total pengunjung sampai saat ini : 3 orang </h4>
-
-						<div class="p-container">
-							<div class="submit two">
-								<input type="submit" onclick="javascript: showFormTamu()" value="Kembali" >
-							</div>
-							<div class="clear"> </div>
-						</div>
 					
 					</div>
 				</div>		
@@ -189,16 +144,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<p>Nama* </p>
 								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="nama" required>
 								<p>No KTP* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="ktp" required>
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="ktp" id="ktpform" required>
 								<p>Alamat* </p>
 								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="alamat" required>
 								<p>Pekerjaan/Sekolah* </p>
 								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="pekerjaan" required>
 								<p>No HP* </p>
-								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="hp" required>
+								<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="hp" id="hpform" required>
 								
 								<div class="sign-up">
-									<p class="keterangan">* harus diisi</p>
+									<p class="keterangan" id="keterangan">* harus diisi</p>
 									<input type="submit" value="Daftar" name="daftar">
 								</div>
 							</form>

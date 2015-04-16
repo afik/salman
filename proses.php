@@ -57,7 +57,57 @@
 					echo'<div class="clear"> </div>';
 				echo'</div>';
 			closeConnection($link);
-		}		
+		}
+		else if ($_GET['state']==2)//buat daftar tamu
+		{
+			$link = init();
+			date_default_timezone_set("Asia/Jakarta");
+			$datenow = date("y-m-d");
+			
+			$query = "SELECT * from pengunjung WHERE DATE(tanggal_kunjungan) = '".$datenow."'";
+			
+			$result = mysqli_query($link,$query);
+
+			if($result === FALSE) { 
+				die(mysql_error()); // TODO: better error handling
+			}
+
+			if (mysqli_num_rows($result) > 0) {	
+				echo '<h2> Daftar tamu '.$datenow.'</h2>';
+				echo '<table class="table-result">';
+					echo '<thead>';
+						echo '<tr>';
+							echo '<th style="width: 5%">No</th>';
+							echo '<th style="width: 30%">Nama </th>';
+							echo '<th style="width: 30%">Asal </th>';
+							echo '<th style="width: 30%">Pekerjaan </th>';
+						echo '</tr>';
+					echo'</thead>';
+					echo'<tbody>';
+					$j = 1;	
+					while($row = mysqli_fetch_assoc($result)) {
+						echo'<tr>';
+						echo'<td>'.$j.'</td>';
+						echo'<td>'.$row['nama'].'</td>';
+						echo'<td>'.$row['alamat'].'</td>';
+						echo'<td>'.$row['pekerjaan'].'</td>';
+						echo'</tr>';
+					}
+					echo'</tbody>';
+				echo'</table>';
+				echo'<br>';
+				echo'<h4> Total pengunjung sampai saat ini : '.mysqli_num_rows($result).' orang </h4>';
+			}
+			else {
+				echo '<h2> Belum ada pengunjung hari ini</h2>';
+			}
+			echo'<div class="p-container">';
+				echo'<div class="submit two">';
+					echo'<input type="submit" onclick="javascript: showFormTamu()" value="Kembali" >';
+				echo'</div>';
+				echo'<div class="clear"> </div>';
+			echo'</div>';
+		}
 	}
 
 	function tambahPengunjung($link, $nama, $alamat, $pekerjaan) {
@@ -111,10 +161,7 @@
 		else {
 			$query = "SELECT * from buku";
 		}
-
 		return $query;
-
-		
 	}
 
 ?>

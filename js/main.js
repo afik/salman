@@ -5,6 +5,26 @@
 
 		daftarTamu.style.display = 'block';
 		formTamu.style.display = 'none';
+
+		var xmlhttp;
+	    if (window.XMLHttpRequest)
+	    {// code for IE7+, Firefox, Chrome, Opera, Safari
+	        xmlhttp=new XMLHttpRequest();
+	    }
+	    else
+	    {// code for IE6, IE5
+	        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	    }
+	    xmlhttp.onreadystatechange=function()
+	    {
+	        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	        {
+	            document.getElementById("daftar-tamu").innerHTML=xmlhttp.responseText;
+	        }
+	    }
+	    // alert(nama+','+pengarang+','+kategori);
+	    xmlhttp.open("GET","proses.php?state=2",true);
+	    xmlhttp.send();
 	}
 
 	function showFormTamu() {
@@ -71,4 +91,3 @@
         $respTabs.find('.resp-tab-content[aria-labelledby = ' + $tabAria + ']').addClass('resp-tab-content-active').attr('style', 'display:block');
     }
 
-	
